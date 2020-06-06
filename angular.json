@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Ejemplo": {
+    "FirebaseAuthBD": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Ejemplo",
+            "outputPath": "dist/FirebaseAuthBD",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Ejemplo:build"
+            "browserTarget": "FirebaseAuthBD:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Ejemplo:build:production"
+              "browserTarget": "FirebaseAuthBD:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Ejemplo:build"
+            "browserTarget": "FirebaseAuthBD:build"
           }
         },
         "test": {
@@ -114,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Ejemplo:serve"
+            "devServerTarget": "FirebaseAuthBD:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Ejemplo:serve:production"
+              "devServerTarget": "FirebaseAuthBD:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "Ejemplo"
+  "defaultProject": "FirebaseAuthBD"
 }
