@@ -15,12 +15,15 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth) {
     this.afAuth.currentUser.then((user) => {this.aux = user; });
     this.$user.next(this.aux);
+    this.afAuth.currentUser.then((user) => {
+      this.aux = user;
+    });
    }
 
    updateUser(){
     this.afAuth.currentUser.then((user) => {this.aux = user; });
     this.$user.next(this.aux);
-    // console.log(this.aux);
+    console.log(this.aux);
   }
 
   setUser(user){

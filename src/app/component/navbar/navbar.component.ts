@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit{
       this.currenUser = user;
     });
     if (this.currenUser) {
-      console.log(this.currenUser);
       this.upUser(this.currenUser);
     }
     this.suscribeToUser();
@@ -44,7 +43,6 @@ export class NavbarComponent implements OnInit{
     this.sub_user = this.userService._user.subscribe((user) => {
       if (user){
         this.ngZone.run(() => { // para cuando se refresca la pagina, no se pierda el usuario
-          console.log(user);
           this.upUser(user);
         });
       }

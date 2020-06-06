@@ -38,7 +38,7 @@ export class PerfilComponent implements OnInit {
   addMyPosts(user) {
     this.bandera = true;
     this.flagLoading = true;
-    this.bd.collection(`usuarios/${user.uid}/posts`).get().then((querySnapshot) => {
+    this.bd.collection(`usuarios/${user.uid}/posts`).onSnapshot((querySnapshot) => {
       this.myPosts = [];
       querySnapshot.forEach((doc) => {
         const id = doc.id;

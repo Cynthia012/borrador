@@ -1,6 +1,6 @@
 import { UserService } from './../../service/user.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth'; // firebase authentication
 import { FormGroup, FormControl, Validators } from '@angular/forms'; // reactive forms
 import * as firebase from 'firebase/app';
@@ -29,16 +29,21 @@ export class LoginComponent implements OnInit {
   mensaje = 'Bienvenido! Inicia Sesion!';
   bd;
 
-  constructor(private userService: UserService, private afAuth: AngularFireAuth, private router: Router, private afBD: AngularFirestore ) {
+  constructor(private ngZone: NgZone,
+              private userService: UserService,
+              private afAuth: AngularFireAuth,
+              private router: Router,
+              private afBD: AngularFirestore ) {
     this.formLogin = new FormGroup({
       correo: new FormControl('', [Validators.required, Validators.email]),
       contrasena: new FormControl('', Validators.required)
     });
     this.afAuth.onAuthStateChanged((user) => {
-      this.onAuthStateChange(user);
+      this.ngZone.run(() => {
+        this.onAuthStateChange(user);
+      });
     });
     this.bd = this.afBD.firestore;
-    // this.userService.updateUser();
    }
 
   ngOnInit(): void {
@@ -61,7 +66,7 @@ export class LoginComponent implements OnInit {
     this.flagLoading = true;
     this.afAuth.signInWithEmailAndPassword(this.formLogin.value.correo, this.formLogin.value.contrasena)
     .then( (res) => {
-      this.userService.updateUser();
+      console.log('inicio sesionm login');
       this.flagLoading = false;
       this.router.navigate(['/perfil']);
     })
@@ -74,6 +79,7 @@ export class LoginComponent implements OnInit {
         sweetAlert('Error', 'La contrasena es incorrecta, intenta de nuevo', 'error');
       }
     });
+    this.userService.updateUser();
   }
 
   doGoogleLogin(){
@@ -126,8 +132,7 @@ export class LoginComponent implements OnInit {
 
     })
       .then((res) => {
-        console.log('usuario agregado a la base de datos');
-        this.userService.updateUser();
+        // this.userService.updateUser();
       })
       .catch((err) => {
         console.log(err);
@@ -137,6 +142,7 @@ export class LoginComponent implements OnInit {
 
   singout(){
     this.afAuth.signOut().then((res) => {
+      this.userService.updateUser();
       console.log('se cerro en logincomponent');
     });
   }
