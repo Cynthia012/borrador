@@ -1,1 +1,18 @@
-<p>post works!</p>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-lg-7 offset-lg-3 col-md-6 offset-md-3 col-12">
+            <form [formGroup]="formPost" (keyup.enter)="postear()" (ngSubmit)="postear()" class="needs-validation" novalidate>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Mensaje</label>
+                    <div class="col-8">
+                        <textarea [ngClass]="{ 'is-invalid': !formPost.get('message').valid }" class="form-control"
+                             placeholder="Que estas pensando?" formControlName="message" ></textarea>
+                        <div *ngIf="formPost.controls['message'].errors?.require" class="invalid-feedback">
+                            Poste Algo!
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
