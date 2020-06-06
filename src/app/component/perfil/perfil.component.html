@@ -1,0 +1,13 @@
+<app-loading *ngIf="this.flagLoading"></app-loading>
+<div *ngIf="this.bandera" class="container my-5">
+    <div *ngFor="let post of myPosts" class="card-deck">
+        <div class="card my-4">
+            <div class="card-body">
+                <h5 class="card-title">{{post.id}}</h5>
+                <p class="card-text">{{post.mensaje}}</p>
+                <p class="card-text"> <small class=" text-muted">{{post.autor}}</small></p>
+                <p class="card-text"><small class="text-muted">{{post.hora}}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
